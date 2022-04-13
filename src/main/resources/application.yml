@@ -1,0 +1,46 @@
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/xyp_system?serverTimezone=Asia/Shanghai
+      username: root
+      password: MySQLglh123,.
+
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: xyp_
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+fisco:
+  cryptoMaterial:
+    certPath: "conf"
+
+  network:
+    peers:
+      #改自己ip
+      - "101.43.218.145:20200"
+
+  amop:
+    #  - publicKeys: [ "conf/amop/consumer_public_key_1.pem" ]
+    #    topicName: "PrivateTopic1"
+    #  - password: "123456"
+    #    privateKey: "conf/amop/consumer_private_key.p12"
+    #    topicName: "PrivateTopic2"
+
+    account:
+      keyStoreDir: "account"
+      #  accountFilePath: "conf"
+      accountFileFormat: "pem"
+    #  accountAddress: "0x"
+    #  password: ""
+
+    threadPool:
+      #  channelProcessorThreadSize: "16"
+      #  receiptProcessorThreadSize: "16"
+      maxBlockingQueueSize: "102400"
+
