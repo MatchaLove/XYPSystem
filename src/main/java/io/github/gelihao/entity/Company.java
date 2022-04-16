@@ -5,15 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Company {
 
     @TableId
     private Integer id;
-    private String username;
-    private String password;
-    private String nickname;
-    private String avatar;
+    private String identifier;
+    private String companyname;
+    private String chargeman;
+    private String address;
+    private Float credit;
+    private Date createdtime;
+    private Date updatedtime;
+
 }

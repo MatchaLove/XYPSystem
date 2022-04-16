@@ -5,15 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Blacklist {
 
     @TableId
     private Integer id;
-    private String username;
-    private String password;
-    private String nickname;
-    private String avatar;
+    private String identifier;
+    private String companyname;
+    private String reason;
+    private Date joindate;
 }
