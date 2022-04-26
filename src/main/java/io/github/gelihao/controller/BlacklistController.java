@@ -1,6 +1,7 @@
 package io.github.gelihao.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.gelihao.api.CommonResult;
 import io.github.gelihao.entity.Blacklist;
 import io.github.gelihao.service.BlacklistService;
@@ -38,13 +39,17 @@ public class BlacklistController {
 //    }
     //https://avatars.githubusercontent.com/u/62493195?v=4
     @GetMapping("/fetchlist")
-    public CommonResult<Object> getList(){
+    public CommonResult<Object> getList(@RequestParam Map listQuery){
+        System.out.println("listQuery = " + listQuery);
+        Long current = Long.parseLong((String) listQuery.get("page"));
+        Long size = Long.parseLong((String) listQuery.get("limit"));
+        System.out.println("size = " + size);
+        System.out.println("current = " + current);
+        Page<Blacklist> page = new Page<>(current, size);
+        Page<Blacklist> blacklistPage = blacklistService.page(page);
         Map<String,Object> data = new HashMap<>();
-        //System.out.println("params" + token);
-        List<Blacklist> blacklists = blacklistService.list();
-
-        data.put("total", blacklists.size());
-        data.put("items", blacklists);
+        data.put("total", blacklistPage.getTotal());
+        data.put("items", blacklistPage.getRecords());
 
         return CommonResult.success(data);
 

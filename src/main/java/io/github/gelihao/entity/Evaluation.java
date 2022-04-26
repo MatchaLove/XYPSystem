@@ -5,17 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Evaluation {
 
     @TableId
     private Integer id;
-    private String username;
-    private String password;
-    private String nickname;
-    private String avatar;
-    private String role;
-    private String company;
+    private String identifier;
+    private String companyname;
+    private String evaluator;
+    private Integer credit;
+    private Integer status;
+    private String remark;
+    private Date editdate;
 }

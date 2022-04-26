@@ -7,9 +7,7 @@ import io.github.gelihao.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -37,7 +35,7 @@ public class UserController {
     }
     //https://avatars.githubusercontent.com/u/62493195?v=4
     @GetMapping("/info")
-    public CommonResult<Map<String,String>> getInfo(@RequestParam("token") String token){
+    public CommonResult<Map<String,Object>> getInfo(@RequestParam("token") String token){
         //System.out.println("params" + token);
         QueryWrapper<User> queryWrapper = new QueryWrapper();
         queryWrapper.eq("username",token);
@@ -45,9 +43,14 @@ public class UserController {
         if (Objects.isNull(one)){
             return CommonResult.failed("用户登录信息过期");
         }else{
-            Map<String,String> data = new HashMap<>();
+            Map<String,Object> data = new HashMap<>();
             data.put("name",one.getNickname());
+            data.put("username",one.getUsername());
             data.put("avatar",one.getAvatar());
+            List<String> roles = new ArrayList<>();
+            roles.add(one.getRole());
+            data.put("roles",roles);
+            data.put("information","未创建information字段");
             return CommonResult.success(data);
         }
     }
