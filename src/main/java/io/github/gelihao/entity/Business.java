@@ -10,16 +10,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Examination {
+public class Business {
 
     @TableId
     private Integer id;
-    private String identifier;
-    private String companyname;
     private String businessid;
     private String businessname;
-    private String examinator;
-    private Integer status;//0未审核 1yes 2不通过
-    private String remark;
-    private Date editdate;
+    private String demandfile;
+
+
 }

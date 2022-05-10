@@ -10,18 +10,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Evaluation {
+public class Application {
 
     @TableId
     private Integer id;
     private String identifier;
-    private String companyname;
-    private String evaluator;
-    private Integer credit;
-    private Integer commercialcredit;
-    private Integer socialscorecredit;
-    private Integer publiccredit;
-    private Integer status;
-    private String remark;
+    private String businessid;
+    private String filepath;
     private Date editdate;
 }

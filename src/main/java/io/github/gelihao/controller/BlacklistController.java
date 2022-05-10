@@ -41,10 +41,8 @@ public class BlacklistController {
     @GetMapping("/fetchlist")
     public CommonResult<Object> getList(@RequestParam Map listQuery){
         System.out.println("listQuery = " + listQuery);
-        Long current = Long.parseLong((String) listQuery.get("page"));
-        Long size = Long.parseLong((String) listQuery.get("limit"));
-        System.out.println("size = " + size);
-        System.out.println("current = " + current);
+        Long current = Long.parseLong((String) listQuery.get("current"));
+        Long size = Long.parseLong((String) listQuery.get("size"));
         Page<Blacklist> page = new Page<>(current, size);
         Page<Blacklist> blacklistPage = blacklistService.page(page);
         Map<String,Object> data = new HashMap<>();
@@ -62,4 +60,25 @@ public class BlacklistController {
         return CommonResult.success();
 
     }
+
+//    @PostMapping("/delete")
+//    public Result<String> getBlacklist(@RequestHeader("X-Token") String token, @RequestBody Blacklist blacklist) {
+//        Claims claims = JWTUtil.parseToken(token, "BUAA");
+//        Long uid = Long.parseLong(claims.getSubject());
+//        System.out.println("请求网页的用户 uid = " + uid);
+//        System.out.println("请求删除的黑名单 = " + blacklist);
+//        boolean result = blacklistService.removeById(blacklist);
+//        return result ? Result.success("删除黑名单成功"): Result.failed("删除黑名单失败");
+//    }
+//    @PostMapping("/add")
+//    public Result<String> addBlacklist(@RequestBody Blacklist blacklist) {
+//        System.out.println("请求添加的黑名单 = " + blacklist);
+//        boolean save = blacklistService.save(blacklist);
+//        if (save) {
+//            return Result.success("添加黑名单成功");
+//        }
+//        else {
+//            return Result.failed("添加黑名单失败");
+//        }
+//    }
 }

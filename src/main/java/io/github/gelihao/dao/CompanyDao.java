@@ -9,10 +9,14 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface CompanyDao extends BaseMapper<Company> {
 
-    @Select("SELECT xyp_company.credit " +
-            " FROM xyp_user, xyp_company " +
+    @Select("SELECT xyp_evaluation.credit " +
+            " FROM xyp_user, xyp_evaluation " +
             " WHERE xyp_user.username = #{username} " +
-            "     AND xyp_company.identifier = xyp_user.company")
+            "     AND xyp_evaluation.identifier = xyp_user.company")
     Integer findUserCreditByUsername(@Param("username") String username);
 
+    @Select("SELECT xyp_company.companyname " +
+            " FROM xyp_company " +
+            " WHERE xyp_company.identifier = #{identifier} " )
+    String findNameByIdentifier(@Param("identifier") String identifier);
 }

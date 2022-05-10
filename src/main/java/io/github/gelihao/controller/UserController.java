@@ -1,7 +1,9 @@
 package io.github.gelihao.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.gelihao.api.CommonResult;
+import io.github.gelihao.entity.Examination;
 import io.github.gelihao.entity.User;
 import io.github.gelihao.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-
     @PostMapping ("/login")
     public CommonResult<Map<String,String>> login(@RequestBody User user){
         //System.out.println(user);
@@ -29,7 +30,7 @@ public class UserController {
             Map<String,String> data = new HashMap<>();
             // TODO 根据用户信息生成token，并且将用户信息存入缓存
             //需更改前端的验证逻辑
-            data.put("token","admin");
+            data.put("token", one.getUsername());
             return CommonResult.success(data);
         }
     }
@@ -59,6 +60,34 @@ public class UserController {
     public CommonResult<Object> logout(@RequestBody String token){
 //        System.out.println("token = " + token);
 //        TODO 清除用户缓存
+        return CommonResult.success();
+
+    }
+
+    @PostMapping("/updateuser")
+    public CommonResult<Object> updateUser(@RequestBody User user){
+        System.out.println(user);
+
+        userService.updateById(user);
+        return CommonResult.success();
+
+    }
+
+    @GetMapping("/fetchlist")
+    public CommonResult<Object> getUserList(@RequestParam Map listQuery){
+
+        Page<User> userPage = userService.pageByListQuery(listQuery);
+        Map<String,Object> data = new HashMap<>();
+        data.put("total", userPage.getTotal());
+        data.put("items", userPage.getRecords());
+        return CommonResult.success(data);//data
+
+    }
+
+    @PostMapping("/adduser")
+    public CommonResult<Object> addUser(@RequestBody User user){
+        System.out.println(user);
+        userService.save(user);
         return CommonResult.success();
 
     }
