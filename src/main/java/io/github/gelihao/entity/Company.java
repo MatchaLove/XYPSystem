@@ -18,6 +18,8 @@ public class Company {
     private String companyname;
     private String chargeman;
     private String address;
+    private String phone;
+    private String email;
     private Float credit;
     private Date createdtime;
     private Date updatedtime;

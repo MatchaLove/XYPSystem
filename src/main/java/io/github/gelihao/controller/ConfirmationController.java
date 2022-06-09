@@ -39,7 +39,8 @@ public class ConfirmationController {
     private CompanyDao companyDao;
 
     @PostMapping(value = "/submit")
-    public CommonResult<Object> uploadFile(@RequestParam("files") MultipartFile[] files, HttpServletRequest request) throws Exception {
+    public CommonResult<Object> uploadFile(@RequestParam("files") MultipartFile[] files,
+                                           HttpServletRequest request) throws Exception {
         Map<String,String> parmMap=new HashMap<String,String>();
         // getParameterMap()，获得请求参数map
         Map<String,String[]> map= request.getParameterMap();
@@ -50,7 +51,6 @@ public class ConfirmationController {
         while(iterator.hasNext()){
             String k=iterator.next();
             parmMap.put(k, map.get(k)[0]);
-
         }
         QueryWrapper<User> queryWrapper = new QueryWrapper();
         queryWrapper.eq("username",parmMap.get("username"));
@@ -78,7 +78,6 @@ public class ConfirmationController {
         evaluationQueryWrapper.eq("identifier",identifier);
         Evaluation evaluationOne = evaluationService.getOne(evaluationQueryWrapper);
         if (Objects.isNull(evaluationOne)){
-
             Evaluation evaluation = new Evaluation();
             evaluation.setIdentifier(identifier);
             evaluation.setCompanyname(companyDao.findNameByIdentifier(identifier));
@@ -89,7 +88,7 @@ public class ConfirmationController {
 //            evaluationOne.setEvaluator("");
 //            evaluationOne.setStatus(0);
 //            evaluationOne.setCredit(0);
-            return CommonResult.failed("您已进行评价，请勿重复申请");
+            return CommonResult.failed("您已申请评价，请勿重复申请");
         }
         return CommonResult.success("申请成功");
     }

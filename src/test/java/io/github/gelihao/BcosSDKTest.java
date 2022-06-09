@@ -27,20 +27,18 @@ public class BcosSDKTest
 
         CryptoKeyPair cryptoKeyPair = client.getCryptoSuite().getCryptoKeyPair();
 
-        Asset asset = Asset.deploy(client, cryptoKeyPair);
-        TransactionReceipt receipt = asset.register("testAccountHello", BigInteger.valueOf(10000));
-        Tuple2<BigInteger, BigInteger> result = asset.select("testAccountHello");
-//        HelloWorld helloWorld = HelloWorld.deploy(client, cryptoKeyPair);
-//
-//        // 调用HelloWorld合约的get接口
-//        String getValue = helloWorld.get();
-//        System.out.println(getValue);
-//        System.out.println();
-//        // 调用HelloWorld合约的set接口
-//        TransactionReceipt receipt = helloWorld.set("Hello, fisco2");
-//        getValue = helloWorld.get();
-//        System.out.println(getValue);
-        System.out.println("result " + result.getValue1() + result.getValue2());
+
+        HelloWorld helloWorld = HelloWorld.deploy(client, cryptoKeyPair);
+
+        // 调用HelloWorld合约的get接口
+        String getValue = helloWorld.get();
+        System.out.println(getValue);
+        System.out.println();
+        // 调用HelloWorld合约的set接口
+        TransactionReceipt receipt = helloWorld.set("Hello, fisco35");
+        getValue = helloWorld.get();
+        System.out.println(getValue);
+
     }
 
     public static void main(String[] args) throws Exception{

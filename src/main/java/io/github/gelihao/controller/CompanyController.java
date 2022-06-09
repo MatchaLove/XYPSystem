@@ -29,7 +29,6 @@ public class CompanyController {
         data.put("credit", credit);
         System.out.println("creditresult" + credit);
         return CommonResult.success(data);
-
     }
 
     @PostMapping("/delete")

@@ -21,21 +21,15 @@ public class BlacklistServiceImpl extends ServiceImpl<BlacklistDao, Blacklist> i
     @Override
     public Page<Blacklist> pageByListQuery(Map<String, String> listQuery) {
         System.out.println("listQuery = " + listQuery);
-        String company = listQuery.get("company");
-        String representative = listQuery.get("representative");
-        String phone = listQuery.get("phone");
-        String email = listQuery.get("email");
-        String address = listQuery.get("address");
+        String companyname = listQuery.get("companyname");
+        String identifier = listQuery.get("identifier");
         Page<Blacklist> page = new Page<>(
                 Long.parseLong(listQuery.get("current")),
                 Long.parseLong(listQuery.get("size"))
         );
         QueryWrapper<Blacklist> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank(company), "company", company);
-        queryWrapper.like(StringUtils.isNotBlank(representative), "representative", representative);
-        queryWrapper.like(StringUtils.isNotBlank(phone), "phone", phone);
-        queryWrapper.like(StringUtils.isNotBlank(email), "email", email);
-        queryWrapper.like(StringUtils.isNotBlank(address), "address", address);
+        queryWrapper.like(StringUtils.isNotBlank(companyname), "companyname", companyname);
+        queryWrapper.like(StringUtils.isNotBlank(identifier), "identifier", identifier);
         return blacklistDao.selectPage(page, queryWrapper);
     }
 

@@ -16,7 +16,11 @@ public class Business {
     private Integer id;
     private String businessid;
     private String businessname;
-    private String demandfile;
+    private Integer mincredit;
+    private Integer type;
+    private String process;
+    private String mainfile;
+    private String secondfile;
 
 
 }

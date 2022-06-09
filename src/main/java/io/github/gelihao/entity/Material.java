@@ -10,15 +10,17 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Application {
+public class Material {
 
     @TableId
     private Integer id;
-    private Integer ifmain;
-    private Integer ifsecond;
-    private String identifier;
     private String businessid;
-    private String filepath;
-    private String secondfilepath;
-    private Date editdate;
+    private String materialname;
+    private String demofile;
+    private Integer style;
+    private Integer ifdemofile;
+    private Integer ifemptyfile;
+    private Integer type;
+    private String emptyfile;
+    private String resource;
 }

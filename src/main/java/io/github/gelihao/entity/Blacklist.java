@@ -17,5 +17,6 @@ public class Blacklist {
     private String identifier;
     private String companyname;
     private String reason;
+    private String operator;
     private Date joindate;
 }
